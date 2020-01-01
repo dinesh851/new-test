@@ -1,24 +1,43 @@
 import subprocess
-from datetime import datetime
+from datetime import datetime, timedelta
+import random
 
-# Specify the date for the commit
-commit_date = "2022-12-02T12:00:00"
+def create_commit_dates(commits_per_week, start_date, end_date):
+    commit_dates = []
+    current_date = start_date
 
-# Make changes to the README file
-readme_content = "Added new content"
-with open("README.md", "a") as readme_file:
-    readme_file.write(readme_content + "\n")
+    while current_date <= end_date:
+        if current_date.weekday() < 5 and random.random() < commits_per_week:
+            n = random.randint(3, 5)
 
-# Git commands
-commands = [
-    'git add .',
-            
-    'git add README.md',
-    f'git commit --date="{commit_date}" -m "Update README with new content"',
-    # f'git commit  -m "Update README with new content"',
-    'git push  '  # Change 'main' to your default branch name if different
-]
+            for _ in range(n):
+                commit_datetime = datetime(
+                    current_date.year,
+                    current_date.month,
+                    current_date.day,
+                    random.randint(9, 16),
+                    random.randint(0, 59),
+                    random.randint(0, 59),
+                )
+                commit_dates.append(commit_datetime)
 
-# Execute commands
-for command in commands:
-    subprocess.run(command, shell=True)
+        current_date += timedelta(days=1)
+
+    return commit_dates
+
+def generate_fake_commits(commits_per_week, start_date, end_date):
+    commit_dates = create_commit_dates(
+        commits_per_week, start_date, end_date
+    )
+
+    for commit_date in commit_dates:
+        subprocess.run(["git", "add", "."])
+        subprocess.run(["git", "commit", "--date", commit_date.isoformat(), "-m", "fake commit"])
+        subprocess.run(["git", "push"])
+
+if __name__ == "__main__":
+    commits_per_week = 0.75  # 3 or 4 times a week on average
+    start_date = datetime(2020, 1, 1)
+    end_date = datetime(2022, 12, 31)
+
+    generate_fake_commits(commits_per_week, start_date, end_date)
