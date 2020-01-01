@@ -37,7 +37,7 @@ def generate_fake_commits(commits_per_week, start_date, end_date):
             readme_file.write(readme_content + "\n")
 
         subprocess.run(["git", "add", "."])
-        subprocess.run(["git", "commit", "--date", commit_date.isoformat(), "-m", "fake commit"])
+        subprocess.run(["git", "commit", "--date", commit_date.isoformat(), "-m", "232 commit"])
         subprocess.run(["git", "push"])
 
 if __name__ == "__main__":
