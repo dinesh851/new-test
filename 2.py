@@ -20,5 +20,9 @@ commands = [
     'git push  '  # Change 'main' to your default branch name if different
 ]
 for i in range(100):
+    # Make changes to the README file
+    readme_content = "Added new content"
+    with open("README.md", "a") as readme_file:
+        readme_file.write(readme_content + "\n")
     for command in commands:
         subprocess.run(command, shell=True)
