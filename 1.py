@@ -18,7 +18,7 @@ commands = [
   
     f'git add README.md',
     f'git commit --date="{commit_date}" -m "Update README with new content"',
-    f"   git push --set-upstream origin update-readme  "
+    f"   git push --set-upstream origin main  "
 ]
 
 # Execute commands
