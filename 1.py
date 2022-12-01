@@ -2,7 +2,7 @@ import subprocess
 from datetime import datetime
 
 # Specify the date for the commit
-commit_date = "2021-12-01T12:00:00"
+commit_date = "2022-12-01T12:00:00"
 
 # Make changes to the README file
 readme_content = "Added new content"
@@ -16,7 +16,7 @@ commands = [
     'git add README.md',
     f'git commit --date="{commit_date}" -m "Update README with new content"',
     f'git commit  -m "Update README with new content"',
-    'git push -f origin master'  # Change 'main' to your default branch name if different
+    'git push  '  # Change 'main' to your default branch name if different
 ]
 
 # Execute commands
